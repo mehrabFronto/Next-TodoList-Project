@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+   .section {
+      @apply flex flex-col items-center justify-center w-full md:w-[400px] lg:w-[500px] xl:w-[600px];
+   }
+
    .h2 {
-      @apply font-primary text-primary font-semibold text-xl md:text-2xl mb-4 md:mb-6 tracking-[10%] uppercase text-center;
+      @apply font-primary text-primary font-semibold text-xl md:text-2xl mb-8 md:mb-10 tracking-[10%] uppercase text-center;
    }
 
    .btn {
-      @apply bg-primary text-secondary border-none outline-none rounded-lg w-12 md:w-14 h-12 md:h-14 text-xl 
+      @apply bg-primary text-secondary cursor-pointer border-none outline-none rounded-lg w-12 md:w-14 h-12 md:h-14 text-xl 
       md:text-2xl flex justify-center items-center lg:hover:bg-secondary
        lg:hover:text-primary transition-all;
    }
