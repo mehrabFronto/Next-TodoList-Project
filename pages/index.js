@@ -1,26 +1,38 @@
 import Navigation from "@/components/Navigation/Navigation";
 import TodoForm from "@/components/TodoForm/TodoForm";
 import axios from "axios";
-import useSWR from "swr";
 import { BiCheckCircle, BiTrash, BiEdit } from "react-icons/bi";
-
-const fetcher = async (api) => {
-   const { data } = await axios.get(api);
-   return data;
-};
+import { useEffect, useState } from "react";
 
 export default function Home() {
-   const { data, error } = useSWR("getTodos", () => fetcher("/api/todos"));
+   const [loading, setLoading] = useState(true);
+   const [data, setData] = useState([]);
+   const [error, setError] = useState("");
+
+   useEffect(() => {
+      axios
+         .get("/api/todos")
+         .then(({ data }) => {
+            setLoading(false);
+            setError("");
+            setData(data);
+         })
+         .catch(({ message }) => {
+            setLoading(false);
+            setData([]);
+            setError(message);
+         });
+   }, []);
 
    const renderTodoList = () => {
       if (error)
          return (
             <p className="font-primary text-secondary text-xl text-center">
-               There is an error
+               an error occured: {error}
             </p>
          );
 
-      if (!data)
+      if (loading)
          return (
             <p className="font-primary text-secondary text-xl text-center">
                loading...
@@ -61,6 +73,7 @@ export default function Home() {
          <Navigation />
          <main className="h-screen bg-bgColor flex flex-col items-center gap-y-32 py-32 px-4 md:px-0">
             <TodoForm />
+            {/* Todo List */}
             <section className="section">
                <h2 className="h2">To do List</h2>
                <div className="w-full flex flex-col items-cnter gap-y-4">
