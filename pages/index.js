@@ -3,6 +3,8 @@ import TodoForm from "@/components/TodoForm/TodoForm";
 import axios from "axios";
 import { BiCheckCircle, BiTrash, BiEdit } from "react-icons/bi";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
    const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ export default function Home() {
          .then(({ data }) => {
             setLoading(false);
             setError("");
-            setData(data);
+            setData(data.todos);
          })
          .catch(({ message }) => {
             setLoading(false);
@@ -23,6 +25,19 @@ export default function Home() {
             setError(message);
          });
    }, []);
+
+   const deleteTodoHandler = async (id) => {
+      try {
+         const { data } = await axios.delete(`/api/todo/${id}`);
+         setLoading(false);
+         setError("");
+         setData(data.todos);
+         toast.success(data.message);
+      } catch ({ message }) {
+         setLoading(false);
+         toast.error(message);
+      }
+   };
 
    const renderTodoList = () => {
       if (error)
@@ -39,7 +54,7 @@ export default function Home() {
             </p>
          );
 
-      return data.todos.map((todo) => {
+      return data.map((todo) => {
          return (
             <div
                key={todo.id}
@@ -53,7 +68,9 @@ export default function Home() {
                   {todo.title}
                </h3>
                <div className="flex items-center gap-4">
-                  <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
+                  <button
+                     className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl"
+                     onClick={() => deleteTodoHandler(todo.id)}>
                      <BiTrash />
                   </button>
                   <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
@@ -70,6 +87,7 @@ export default function Home() {
 
    return (
       <>
+         <ToastContainer />
          <Navigation />
          <main className="h-screen bg-bgColor flex flex-col items-center gap-y-32 py-32 px-4 md:px-0">
             <TodoForm />
