@@ -1,6 +1,6 @@
 import { BiCheckCircle, BiTrash, BiEdit } from "react-icons/bi";
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, onDelete }) => {
    return (
       <div
          className={`flex items-center justify-between bg-primary rounded-lg w-full shadow-lg ${
@@ -13,7 +13,9 @@ const Todo = ({ todo }) => {
             {todo.title}
          </h3>
          <div className="flex items-center gap-4">
-            <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
+            <button
+               className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl"
+               onClick={() => onDelete(todo.id)}>
                <BiTrash />
             </button>
             <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
