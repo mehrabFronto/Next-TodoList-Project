@@ -1,33 +1,56 @@
-import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 const TodoForm = ({ onAdd }) => {
-   const [todoTitle, setTodoTitle] = useState("");
+   const [todoDetail, setTodoDetail] = useState({ title: "", description: "" });
+
+   const changeHandler = ({ target }) =>
+      setTodoDetail({ ...todoDetail, [target.name]: target.value });
 
    return (
       <section
          className="section"
          onSubmit={(e) => {
             e.preventDefault();
-            onAdd(todoTitle);
-            setTodoTitle("");
+            if (!todoDetail.title) return alert("enter todo title!");
+            onAdd(todoDetail);
+            setTodoDetail({ title: "", description: "" });
          }}>
          <h2 className="h2">Add To do</h2>
-         <form className="flex items-center justify-between w-full gap-4">
+         <form className="flex flex-col items-center gap-y-12 w-full">
             <input
-               value={todoTitle}
-               onChange={({ target }) => setTodoTitle(target.value)}
+               value={todoDetail.title}
+               name="title"
+               onChange={changeHandler}
                type="text"
-               className="bg-transparent border-b border-primary focus:border-secondary transition-all 
-               outline-none flex-1 p-4 text-primary"
+               className="bg-transparent border-b border-primary focus:border-secondary w-full transition-all 
+               outline-none py-4 text-primary"
                placeholder="Todo title..."
             />
-            <button
+            <textarea
+               value={todoDetail.description}
+               name="description"
+               onChange={changeHandler}
+               className="bg-transparent border-b border-primary focus:border-secondary w-full transition-all 
+               outline-none py-4 text-primary resize-none h-32"
+               placeholder="Todo description..."></textarea>
+            <div className="w-full flex items-center justify-between gap-x-4 lg:gap-x-8">
+               <button
+                  type="button"
+                  className="btn-form text-secondary bg-transparent border border-secondary"
+                  onClick={() => setTodoDetail({ title: "", description: "" })}>
+                  Cancel
+               </button>
+               <button
+                  type="submit"
+                  className="btn-form text-secondary bg-primary border border-primary">
+                  Add
+               </button>
+            </div>
+            {/* <button
                type="submit"
                className="btn shadow-md">
                +
-            </button>
+            </button> */}
          </form>
       </section>
    );

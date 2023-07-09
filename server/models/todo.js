@@ -4,12 +4,17 @@ const todoSchema = new mongoose.Schema({
    title: {
       type: String,
       unique: true,
-      require: true,
+      required: true,
+   },
+
+   description: {
+      type: String,
+      required: true,
    },
 
    isCompleted: {
       type: Boolean,
-      require: true,
+      required: true,
    },
 });
 

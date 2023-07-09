@@ -40,9 +40,9 @@ export default function Home() {
       }
    };
 
-   const addTodoHandler = async (todoTitle) => {
+   const addTodoHandler = async (todo) => {
       try {
-         const { data } = await axios.post("/api/todos", { title: todoTitle });
+         const { data } = await axios.post("/api/todos", { todo });
          setLoading(false);
          setError("");
          setData(data.todos);
@@ -58,8 +58,8 @@ export default function Home() {
          <ToastContainer />
          <Navigation />
          <main
-            className="h-screen bg-bgColor flex flex-col lg:flex-row justify-center items-center 
-            lg:items-start gap-y-32 lg:gap-x-24 py-52 px-4 md:px-0">
+            className="h-full lg:h-screen bg-bgColor flex flex-col lg:flex-row justify-center md:items-center 
+            lg:items-start gap-y-32 lg:gap-x-24 py-32 lg:py-52 px-4 md:px-0">
             <TodoForm onAdd={addTodoHandler} />
             <TodoList
                loading={loading}
