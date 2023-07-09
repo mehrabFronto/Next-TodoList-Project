@@ -57,7 +57,9 @@ export default function Home() {
       <>
          <ToastContainer />
          <Navigation />
-         <main className="h-screen bg-bgColor flex flex-col items-center gap-y-32 py-32 px-4 md:px-0">
+         <main
+            className="h-screen bg-bgColor flex flex-col lg:flex-row justify-center items-center 
+            lg:items-start gap-y-32 lg:gap-x-24 py-52 px-4 md:px-0">
             <TodoForm onAdd={addTodoHandler} />
             <TodoList
                loading={loading}

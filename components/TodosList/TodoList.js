@@ -16,6 +16,14 @@ const TodoList = ({ loading, data, error, onDelete }) => {
             </p>
          );
 
+      if (data.length === 0)
+         return (
+            <p className="font-primary text-secondary text-xl text-center">
+               There is no todo
+               <br />
+               add some...
+            </p>
+         );
       return data.map((todo) => {
          return (
             <Todo
