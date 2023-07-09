@@ -15,7 +15,7 @@ const Todo = ({ todo, onDelete }) => {
          <div className="flex items-center gap-4">
             <button
                className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl"
-               onClick={() => onDelete(todo.id)}>
+               onClick={() => onDelete(todo._id)}>
                <BiTrash />
             </button>
             <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
