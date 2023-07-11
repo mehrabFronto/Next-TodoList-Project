@@ -17,6 +17,7 @@ export default async function handler(req, res) {
       const todo = await getOneTodo(query.todoId);
       todo.title = body.todoDetail.title;
       todo.description = body.todoDetail.description;
+      todo.isCompleted = body.todoDetail.isCompleted;
       await todo.save();
       const todos = await Todo.find({});
       return res.status(200).json({ message: "todo edited", todos });

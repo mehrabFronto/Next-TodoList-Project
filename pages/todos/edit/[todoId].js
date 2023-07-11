@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 const TodoEdit = ({ todo }) => {
    const [todoDetail, setTodoDetail] = useState(todo);
+   const [checked, setChecked] = useState(todo.isCompleted);
    const router = useRouter();
 
    const changeHandler = ({ target }) =>
@@ -17,7 +18,7 @@ const TodoEdit = ({ todo }) => {
       else {
          try {
             const { data } = await axios.put(`/api/todos/${todo._id}`, {
-               todoDetail,
+               todoDetail: { ...todoDetail, isCompleted: checked },
             });
             router.push("/");
             toast.success(data.message);
@@ -56,6 +57,22 @@ const TodoEdit = ({ todo }) => {
                   className="bg-transparent border-b border-primary focus:border-secondary w-full transition-all 
                outline-none py-4 text-primary resize-none h-32"
                   placeholder="Todo description..."></textarea>
+               <div className="w-full flex items-center justify-start gap-x-2">
+                  <input
+                     id="complete"
+                     type="checkbox"
+                     checked={checked}
+                     onChange={() => {
+                        setChecked((prevState) => !prevState);
+                        setTodoDetail({ ...todoDetail, isCompleted: checked });
+                     }}
+                  />
+                  <label
+                     htmlFor="complete"
+                     className="text-secondary">
+                     Complete Todo
+                  </label>
+               </div>
                <div className="w-full flex items-center justify-between gap-x-4 lg:gap-x-8">
                   <button
                      type="button"

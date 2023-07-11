@@ -1,6 +1,6 @@
 import Todo from "../Todo/Todo";
 
-const TodoList = ({ loading, data, error, onDelete }) => {
+const TodoList = ({ loading, data, error, onDelete, onComplete }) => {
    const renderTodoList = () => {
       if (error)
          return (
@@ -30,6 +30,7 @@ const TodoList = ({ loading, data, error, onDelete }) => {
                key={todo.id}
                todo={todo}
                onDelete={onDelete}
+               onComplete={onComplete}
             />
          );
       });

@@ -53,6 +53,16 @@ export default function Home() {
       }
    };
 
+   const completeHandler = async (id) => {
+      try {
+         const { data } = await axios.put(`/api/todos/complete/${id}`);
+         setData(data.todos);
+         toast.success(data.message);
+      } catch ({ message }) {
+         toast.error(message);
+      }
+   };
+
    return (
       <>
          <ToastContainer />
@@ -66,6 +76,7 @@ export default function Home() {
                data={data}
                error={error}
                onDelete={deleteTodoHandler}
+               onComplete={completeHandler}
             />
          </main>
       </>
