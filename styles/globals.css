@@ -18,6 +18,10 @@
       @apply flex flex-col items-center justify-center w-full md:w-[500px] lg:w-[450px] xl:w-[550px];
    }
 
+   .h1 {
+      @apply text-gray-200 text-2xl md:text-3xl font-bold font-primary;
+   }
+
    .h2 {
       @apply font-primary text-primary font-semibold text-xl md:text-2xl mb-8 md:mb-10 tracking-[10%] uppercase text-center;
    }
