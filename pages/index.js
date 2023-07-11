@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import TodoList from "@/components/TodosList/TodoList";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Layout from "@/containers/Layout";
 
 export default function Home() {
    const [loading, setLoading] = useState(true);
@@ -66,19 +67,20 @@ export default function Home() {
    return (
       <>
          <ToastContainer />
-         <Navigation />
-         <main
-            className="h-full lg:h-screen bg-bgColor flex flex-col lg:flex-row justify-center md:items-center 
+         <Layout>
+            <main
+               className="h-full lg:h-screen bg-bgColor flex flex-col lg:flex-row justify-center md:items-center 
             lg:items-start gap-y-32 lg:gap-x-24 py-32 lg:py-52 px-4 md:px-0">
-            <TodoForm onAdd={addTodoHandler} />
-            <TodoList
-               loading={loading}
-               data={data}
-               error={error}
-               onDelete={deleteTodoHandler}
-               onComplete={completeHandler}
-            />
-         </main>
+               <TodoForm onAdd={addTodoHandler} />
+               <TodoList
+                  loading={loading}
+                  data={data}
+                  error={error}
+                  onDelete={deleteTodoHandler}
+                  onComplete={completeHandler}
+               />
+            </main>
+         </Layout>
       </>
    );
 }
