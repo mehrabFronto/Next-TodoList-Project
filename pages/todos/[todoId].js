@@ -3,10 +3,9 @@ import { getOneTodo } from "../api/todos/[todoId]";
 const TodoPage = ({ todo }) => {
    return (
       <main
-         className="h-screen bg-bgColor flex flex-col justify-center items-center gap-y-8
-         px-4 md:px-0">
+         className="h-screen bg-bgColor flex flex-col justify-start items-center gap-y-8
+         py-44 px-4 md:px-0">
          <h1 className="h1 border-b">Todo Detail</h1>
-         <span></span>
          <div className="section gap-y-12 text-secondary">
             <div className="flex flex-col items-center">
                <h2 className="h2">Todo Title:</h2>

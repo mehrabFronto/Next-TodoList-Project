@@ -23,9 +23,11 @@ const Todo = ({ todo, onDelete }) => {
                onClick={() => onDelete(todo._id)}>
                <BiTrash />
             </button>
-            <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
+            <Link
+               href={`/todos/edit/${todo._id}`}
+               className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
                <BiEdit />
-            </button>
+            </Link>
             <button className="btn w-10 h-10 py-6 md:w-12 md:h-12 text-xl">
                <BiCheckCircle />
             </button>
