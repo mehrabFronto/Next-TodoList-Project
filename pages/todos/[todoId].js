@@ -6,6 +6,7 @@ import { BiCircle } from "react-icons/bi";
 import axios from "axios";
 import { useState } from "react";
 import Layout from "@/containers/Layout";
+import dbConnect from "@/server/utils/dbConnect";
 
 const TodoPage = ({ todo }) => {
    const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
@@ -61,6 +62,7 @@ const TodoPage = ({ todo }) => {
 export default TodoPage;
 
 export async function getServerSideProps(context) {
+   dbConnect();
    const { query } = context;
 
    const todo = await getOneTodo(query.todoId);

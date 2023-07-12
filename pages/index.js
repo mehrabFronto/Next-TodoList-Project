@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation/Navigation";
 import TodoForm from "@/components/TodoForm/TodoForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,26 +5,24 @@ import TodoList from "@/components/TodosList/TodoList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/containers/Layout";
+import dbConnect from "@/server/utils/dbConnect";
+import Todo from "@/server/models/todo";
 
-export default function Home() {
+export default function Home({ todos }) {
    const [loading, setLoading] = useState(true);
-   const [data, setData] = useState([]);
+   const [data, setData] = useState();
    const [error, setError] = useState("");
 
    useEffect(() => {
-      axios
-         .get("/api/todos")
-         .then(({ data }) => {
-            setLoading(false);
-            setError("");
-            setData(data.todos);
-         })
-         .catch(({ message }) => {
-            setLoading(false);
-            setData([]);
-            setError(message);
-            toast.error(message);
-         });
+      if (todos.length) {
+         setLoading(false);
+         setError("");
+         setData(todos);
+      } else {
+         setLoading(false);
+         setData([]);
+         setError("An error occured!");
+      }
    }, []);
 
    const deleteTodoHandler = async (id) => {
@@ -83,4 +80,14 @@ export default function Home() {
          </Layout>
       </>
    );
+}
+
+export async function getServerSideProps() {
+   dbConnect();
+   const todos = await Todo.find({});
+   return {
+      props: {
+         todos: JSON.parse(JSON.stringify(todos)),
+      },
+   };
 }

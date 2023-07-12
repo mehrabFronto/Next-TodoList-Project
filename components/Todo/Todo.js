@@ -9,7 +9,7 @@ const Todo = ({ todo, onDelete, onComplete }) => {
          }`}>
          <Link
             href={`/todos/${todo._id}`}
-            className="flex flex-col justify-center flex-1 pl-2 h-12 text-bg hover:text-secondary transition-all">
+            className="flex flex-col justify-center flex-1 pl-2 h-12 text-bg hover:text-secondary transition-all truncate">
             <h3
                className={`text-xl font-medium truncate ${
                   todo.isCompleted ? "line-through" : null

@@ -1,3 +1,4 @@
+import TaskList from "../Loader/Loader";
 import Todo from "../Todo/Todo";
 
 const TodoList = ({ loading, data, error, onDelete, onComplete }) => {
@@ -5,14 +6,14 @@ const TodoList = ({ loading, data, error, onDelete, onComplete }) => {
       if (error)
          return (
             <p className="font-primary text-secondary text-xl text-center">
-               an error occured: {error}
+               {error}
             </p>
          );
 
       if (loading)
          return (
-            <p className="font-primary text-secondary text-xl text-center">
-               loading...
+            <p className="font-primary text-secondary text-xl w-full flex items-center justify-center">
+               <TaskList />
             </p>
          );
 
