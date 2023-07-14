@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navigation = () => {
    const [isOpen, setIsOpen] = useState(false);
+   const { data: session, status } = useSession();
+   console.log({ session, status });
    return (
       <header className="w-full text-xl fixed top-0 z-50 bg-primary shadow-lg">
          <nav className="w-full h-full container mx-auto flex justify-between items-center px-2 relative">
@@ -20,8 +23,13 @@ const Navigation = () => {
             {/* mobile menu */}
             {isOpen && (
                <ul
-                  className="lg:hidden flex flex-col items-center justify-center gap-y-5 absolute
-                bg-primary w-full bottom-[-392px] md:bottom-[-390px] left-0 right-0 shadow-xl rounded-b md:rounded pl-2">
+                  className={`lg:hidden flex flex-col items-center justify-center gap-y-5 absolute
+                bg-primary w-full bottom-[-312px] md:bottom-[-320px] left-0 right-0 shadow-xl 
+                rounded-b md:rounded pl-2 ${
+                   !session && status === "loading"
+                      ? "opacity-0"
+                      : "opacity-1000"
+                } transition-all`}>
                   <li className="w-full pt-5 md:pt-0">
                      <Link
                         className="w-full block py-3 text-bgColor font-medium"
@@ -43,59 +51,72 @@ const Navigation = () => {
                         Profile
                      </Link>
                   </li>
-                  <li className="w-full">
-                     <Link
-                        className="w-full block py-4 text-bgColor font-medium"
-                        href="#">
-                        Sign In
-                     </Link>
-                  </li>
-                  <li className="w-full">
-                     <Link
-                        className="w-full block py-4 text-bgColor font-medium"
-                        href="#">
-                        Sign out
-                     </Link>
-                  </li>
+                  {!session && status !== "loading" && (
+                     <li className="w-full">
+                        <button
+                           onClick={() => signIn("github")}
+                           className="w-full flex items-center justify-start py-4 text-bgColor font-medium">
+                           Sign In
+                        </button>
+                     </li>
+                  )}
+                  {session && (
+                     <li className="w-full">
+                        <button
+                           onClick={() => signOut()}
+                           className="w-full flex items-center justify-start py-4 text-bgColor font-medium">
+                           Sign out
+                        </button>
+                     </li>
+                  )}
                </ul>
             )}
             {/* desctop menu */}
-            <ul className="hidden lg:flex items-center justify-center gap-x-8">
+            <ul
+               className={`hidden lg:flex items-center justify-center gap-x-4 ${
+                  !session && status === "loading"
+                     ? "opacity-0"
+                     : "opacity-1000"
+               } transition-all`}>
                <li>
                   <Link
-                     className="block py-6 xl:px-2 2xl:px-4 text-bgColor font-medium hover:text-secondary transition-all"
+                     className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all"
                      href="/">
                      Home
                   </Link>
                </li>
                <li>
                   <Link
-                     className="block py-6 xl:px-2 2xl:px-4 text-bgColor font-medium hover:text-secondary transition-all"
+                     className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all"
                      href="/todos">
                      Todos
                   </Link>
                </li>
                <li>
                   <Link
-                     className="block py-6 xl:px-2 2xl:px-4 text-bgColor font-medium hover:text-secondary transition-all"
+                     className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all"
                      href="/profile">
                      Profile
                   </Link>
                </li>
-               <li>
-                  <Link
-                     className="block py-6 xl:px-2 2xl:px-4 text-bgColor font-medium hover:text-secondary transition-all"
-                     href="#">
-                     Sign In
-                  </Link>
-               </li>
-               <li>
-                  <Link
-                     className="block py-6 xl:px-2 2xl:px-4 text-bgColor font-medium hover:text-secondary transition-all"
-                     href="#">
-                     Sign out
-                  </Link>
-               </li>
+               {!session && status !== "loading" && (
+                  <li>
+                     <button
+                        onClick={() => signIn("github")}
+                        className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all">
+                        Sign In
+                     </button>
+                  </li>
+               )}
+               {session && (
+                  <li>
+                     <button
+                        onClick={() => signOut()}
+                        className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all">
+                        Sign out
+                     </button>
+                  </li>
+               )}
             </ul>
          </nav>
       </header>
