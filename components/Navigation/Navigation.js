@@ -40,8 +40,8 @@ const Navigation = () => {
                   <li className="w-full">
                      <Link
                         className="w-full block py-4 text-bgColor font-medium"
-                        href="/todos">
-                        Todos
+                        href="/protected-ssr">
+                        Protected-SSR
                      </Link>
                   </li>
                   <li className="w-full">
@@ -88,8 +88,8 @@ const Navigation = () => {
                <li>
                   <Link
                      className="block py-6 lg:px-4 xl:px-6 2xl:px-8 text-bgColor font-medium hover:text-secondary transition-all"
-                     href="/todos">
-                     Todos
+                     href="/protected-ssr">
+                     Protected-SSR
                   </Link>
                </li>
                <li>
