@@ -6,12 +6,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const Navigation = () => {
    const [isOpen, setIsOpen] = useState(false);
    const { data: session, status } = useSession();
-   console.log({ session, status });
+
    return (
       <header className="w-full text-xl fixed top-0 z-50 bg-primary shadow-lg">
          <nav className="w-full h-full container mx-auto flex justify-between items-center px-2 relative">
             <Link href="/">
-               <h1 className="h1 hover:tracking-wider transition-all">
+               <h1 className="h1 lg:hover:tracking-wider transition-all">
                   What&apos;s your plan today?
                </h1>
             </Link>
