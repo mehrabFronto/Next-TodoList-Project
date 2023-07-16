@@ -23,17 +23,17 @@ const TodoPage = ({ todo }) => {
          <main
             className="h-screen bg-bgColor flex flex-col justify-start items-center
             py-44 px-4 md:px-0">
-            <section>
+            <section className="section">
                <div className="w-full md:w-[500px] lg:w-[450px] xl:w-[550px] flex items-center justify-between mb-12">
                   <Link
                      href="/"
-                     className="w-10 h-10 flex items-center justify-center text-2xl text-secondary">
+                     className="w-10 h-10 flex items-center justify-center text-2xl lg:text-3xl text-secondary">
                      <BiArrowBack />
                   </Link>
                   <h1 className="h1 border-b">Todo Detail</h1>
                   <button
                      onClick={completeHandler}
-                     className="w-10 h-10 flex items-center justify-center text-2xl text-secondary">
+                     className="w-10 h-10 flex items-center justify-center text-2xl lg:text-3xl text-secondary">
                      {isCompleted ? (
                         <BiCheck className="text-primary" />
                      ) : (
