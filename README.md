@@ -15,4 +15,5 @@ Here're some of the project's best features:
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/mehrabFronto/Next-TodoList-Project/assets/101546573/ecc82cfe-f729-4ce1-b872-7d01f72881b4" alt="project-screenshot" width="1920" height="1080/">
+![NextTodoList](https://github.com/mehrabFronto/Next-TodoList-Project/assets/101546573/cf8cc7d4-4031-4f05-bdf8-d39273f9d534)
+
